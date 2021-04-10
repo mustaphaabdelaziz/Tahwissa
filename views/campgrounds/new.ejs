@@ -1,0 +1,48 @@
+<% layout('layouts/boilerplate')%>
+
+<div class="row mt-3">
+	<h1 class="text-center">New Campground</h1>
+	<div class="col-6 offset-3 mb-3">
+		<form action="/campgrounds" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
+			<div class="form-floating mb-3">
+				<input class="form-control" type="text" id="title" name="campground[title]" placeholder="Title"
+					required>
+				<label for="floatingInput" class="form-label fw-bold fs-6">Title</label>
+				<div class="valid-feedback">looks good</div>
+			</div>
+			<div class="form-floating mb-3">
+				<input class="form-control" type="text" id="location" name="campground[location]" placeholder="Location"
+					required>
+				<label for="floatingInput" class="form-label  fw-bold fs-6">Location</label>
+				<div class="valid-feedback">looks good</div>
+			</div>
+			<div class="mb-3">
+				<label for="floatingInput" class="form-label  fw-bold fs-6">Price</label>
+				<div class="input-group">
+					<span class="input-group-text" id="price-label">DA</span>
+					<input type="text" name="campground[price]" id="price" class="form-control" placeholder="0.00"
+						aria-describedby="price-label" aria-label="price" required>
+					<div class="valid-feedback">looks good</div>
+				</div>
+			</div>
+
+
+			<div class="input-group mb-3">
+				<input type="file" class="form-control" id="image" name="image" multiple required>
+				<label class="input-group-text" for="image">Upload</label>
+			</div>
+
+
+			<div class="form-floating mb-3">
+				<textarea class="form-control" type="text" id="description" name="campground[description]" rows="8"
+					placeholder="description" required></textarea>
+				<label for="floatingInput" class="form-label  fw-bold fs-6">Description</label>
+				<div class="valid-feedback">looks good</div>
+			</div>
+			<div class="mb-3">
+				<button class="btn btn-long btn-outline-success">Add</button>
+			</div>
+		</form>
+		<a href="/campgrounds">All Campgrounds</a>
+	</div>
+</div>
