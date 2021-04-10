@@ -1,17 +1,17 @@
 <% layout('layouts/boilerplate')%>
 
 <div class="row mt-3">
-	<h1 class="text-center">New Campground</h1>
+	<h1 class="text-center">New Post</h1>
 	<div class="col-6 offset-3 mb-3">
-		<form action="/campgrounds" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
+		<form action="/posts" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
 			<div class="form-floating mb-3">
-				<input class="form-control" type="text" id="title" name="campground[title]" placeholder="Title"
+				<input class="form-control" type="text" id="title" name="post[title]" placeholder="Title"
 					required>
 				<label for="floatingInput" class="form-label fw-bold fs-6">Title</label>
 				<div class="valid-feedback">looks good</div>
 			</div>
 			<div class="form-floating mb-3">
-				<input class="form-control" type="text" id="location" name="campground[location]" placeholder="Location"
+				<input class="form-control" type="text" id="location" name="post[location]" placeholder="Location"
 					required>
 				<label for="floatingInput" class="form-label  fw-bold fs-6">Location</label>
 				<div class="valid-feedback">looks good</div>
@@ -20,7 +20,7 @@
 				<label for="floatingInput" class="form-label  fw-bold fs-6">Price</label>
 				<div class="input-group">
 					<span class="input-group-text" id="price-label">DA</span>
-					<input type="text" name="campground[price]" id="price" class="form-control" placeholder="0.00"
+					<input type="text" name="post[price]" id="price" class="form-control" placeholder="0.00"
 						aria-describedby="price-label" aria-label="price" required>
 					<div class="valid-feedback">looks good</div>
 				</div>
@@ -34,7 +34,7 @@
 
 
 			<div class="form-floating mb-3">
-				<textarea class="form-control" type="text" id="description" name="campground[description]" rows="8"
+				<textarea class="form-control" type="text" id="description" name="post[description]" rows="8"
 					placeholder="description" required></textarea>
 				<label for="floatingInput" class="form-label  fw-bold fs-6">Description</label>
 				<div class="valid-feedback">looks good</div>
@@ -43,6 +43,6 @@
 				<button class="btn btn-long btn-outline-success">Add</button>
 			</div>
 		</form>
-		<a href="/campgrounds">All Campgrounds</a>
+		<a href="/posts">All Campgrounds</a>
 	</div>
 </div>

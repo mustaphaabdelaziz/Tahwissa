@@ -4,33 +4,33 @@
 	<div class="col-7 shadow mt-2">
 		<div class="d-flex align-items-center mt-3">
 			<div class="flex-shrink-0">
-				<img class="avatar" src="<%= campground.author.picture.url %> " />
+				<img class="avatar" src="<%= post.author.picture.url %> " />
 			</div>
 
 			<div class="d-flex ms-3">
-				<a href="#" class="card-text fw-bold" style="text-decoration: none">
-					<%= campground.author.fullname %></a>
+				<a href="#" class="card-text fw-bold text-decoration-none">
+					<%= post.author.fullname %></a>
 			</div>
 		</div>
 		<div class="card mb-3 mt-2">
 			<!-- Carousel A slideshow component for cycling through elements—images 
 				or slides of text—like a carousel. -->
-			<div id="campgroundCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+			<div id="postCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
 				<div class="carousel-inner">
-					<% campground.images.forEach((img, i) => {  %>
+					<% post.images.forEach((img, i) => {  %>
 					<div class="carousel-item <%= i === 0 ? 'active' : ''%>">
 						<img src="<%= img.url%>" class="d-block w-100" alt="">
 					</div>
 					<% }) %>
 
 				</div>
-				<% if(campground.images.length > 1) {%>
-				<button class="carousel-control-prev" type="button" data-bs-target="#campgroundCarousel"
+				<% if(post.images.length > 1) {%>
+				<button class="carousel-control-prev" type="button" data-bs-target="#postCarousel"
 					data-bs-slide="prev">
 					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 					<span class="visually-hidden">Previous</span>
 				</button>
-				<button class="carousel-control-next" type="button" data-bs-target="#campgroundCarousel"
+				<button class="carousel-control-next" type="button" data-bs-target="#postCarousel"
 					data-bs-slide="next">
 					<span class="carousel-control-next-icon" aria-hidden="true"></span>
 					<span class="visually-hidden">Next</span>
@@ -40,18 +40,18 @@
 			<div class="card-body">
 				<p class="card-text">
 					<small class="text-muted">
-						<i class="bi bi-geo-alt"> <%=campground.location %> </i>
+						<i class="bi bi-geo-alt"> <%=post.location %> </i>
 					</small>
 				</p>
-				<h5 class="card-title fw-bold"><%=campground.title %></h5>
-				<p class="card-text"><%=campground.description %></p>
+				<h5 class="card-title fw-bold"><%=post.title %></h5>
+				<p class="card-text"><%=post.description %></p>
 
 				<div class="card-body">
-					<% if ( currentUser && campground.author.equals(currentUser._id)){%>
-					<a href="/campgrounds/<%=campground._id%>/edit" class="card-link btn btn-warning">
+					<% if ( currentUser && post.author.equals(currentUser._id)){%>
+					<a href="/posts/<%=post._id%>/edit" class="card-link btn btn-warning">
 						<i class="bi bi-pencil-fill"></i>
 					</a>
-					<form class="d-inline" id="delete-form" action="/campgrounds/<%=campground._id %>/?_method=DELETE"
+					<form class="d-inline" id="delete-form" action="/posts/<%=post._id %>/?_method=DELETE"
 						method="POST">
 						<button class="card-link btn btn-danger">
 							<i class="bi bi-trash-fill"></i>
@@ -61,7 +61,7 @@
 				</div>
 			</div>
 			<% if (currentUser) {%>
-			<form action="/campgrounds/<%= campground._id%>/reviews" method="POST" class="needs-validation" novalidate>
+			<form action="/posts/<%= post._id%>/reviews" method="POST" class="needs-validation" novalidate>
 				<div class="d-flex justify-content-start">
 					<h4>Rate us:</h4>
 					<fieldset class="starability-basic ms-2">
@@ -88,7 +88,7 @@
 				</div>
 				<div class="valid-feedback">looks good</div>
 			</form>
-			<% } %> <% for(let review of campground.reviews) { %>
+			<% } %> <% for(let review of post.reviews) { %>
 			<div class="">
 				<div class="card-body d-flex justify-content-between">
 					<div class="d-flex align-items-center">
@@ -109,7 +109,7 @@
 						</div>
 						<% if ( currentUser && review.author.equals(currentUser._id) ) {%>
 						<form class="p-2"
-							action="/campgrounds/<%=campground._id%>/reviews/<%=review._id%>?_method=DELETE"
+							action="/posts/<%=post._id%>/reviews/<%=review._id%>?_method=DELETE"
 							method="POST">
 							<button class="card-link btn btn-danger">
 								<i class="bi bi-trash-fill"></i>
@@ -128,7 +128,7 @@
 </div>
 <script>
 	const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
-	const campground = <%- JSON.stringify(campground) %>
+	const post = <%- JSON.stringify(post) %>
 </script>
 
 <script src="/js/showPageMap.js"></script>

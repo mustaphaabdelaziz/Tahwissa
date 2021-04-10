@@ -1,42 +1,42 @@
 const express = require("express");
 const router = express.Router();
-const Campground = require("../models/campground");
+const Post = require("../models/post");
 const {
   isLoggedIn,
   isAuthor,
-  validateCampground,
+  validatePost,
 } = require("../middleware/middleware");
 const catchAsync = require("../utils/catchAsync");
-const campgrounds = require("../controllers/campgrounds");
+const posts = require("../controllers/posts");
 const multer = require("multer");
 const { storage } = require("../cloudinary");
 const upload = multer({ storage });
 // groupe the diffrent http verbs under the same route
 router
   .route("/")
-  .get(catchAsync(campgrounds.index))
+  .get(catchAsync(posts.index))
   .post(
     isLoggedIn,
     upload.array("image"),
-    validateCampground,
-    catchAsync(campgrounds.createCampground)
+    validatePost,
+    catchAsync(posts.createPost)
   );
 
-router.route("/new").get(isLoggedIn, campgrounds.renderNewForm);
+router.route("/new").get(isLoggedIn, posts.renderNewForm);
 
 router
   .route("/:id")
-  .get(catchAsync(campgrounds.showCampground))
+  .get(catchAsync(posts.showPost))
   .put(
     isLoggedIn,
     isAuthor,
     upload.array('image'),
-    validateCampground,
-    catchAsync(campgrounds.updateCampground)
+    validatePost,
+    catchAsync(posts.updatePost)
   )
-  .delete(isLoggedIn, isAuthor, catchAsync(campgrounds.deleteCampground));
+  .delete(isLoggedIn, isAuthor, catchAsync(posts.deletePost));
 router
   .route("/:id/edit")
-  .get(isLoggedIn, isAuthor, catchAsync(campgrounds.renderEditForm));
+  .get(isLoggedIn, isAuthor, catchAsync(posts.renderEditForm));
 
 module.exports = router;

@@ -21,7 +21,7 @@ ImageSchema.virtual("thumbnail").get(function () {
 // { virtuals: true }.
 const opts = { toJSON: { virtuals: true } };
 
-const CampgroundSchema = new Schema(
+const PostSchema = new Schema(
   {
     title: String,
     images: [ImageSchema],
@@ -53,15 +53,15 @@ const CampgroundSchema = new Schema(
   opts
 );
 
-CampgroundSchema.virtual("properties.popUpMarkup").get(function () {
+PostSchema.virtual("properties.popUpMarkup").get(function () {
   return `
-  <strong><a href="/campgrounds/${this._id}">${this.title}
+  <strong><a href="/posts/${this._id}">${this.title}
   <img class = " avatar thumbnail" src="${this.images[0].url}" />
   </a><strong>
   <p>${this.description.substring(0, 40)}...</p>`;
 });
 
-CampgroundSchema.post("findOneAndDelete", async function (doc) {
+PostSchema.post("findOneAndDelete", async function (doc) {
   if (doc) {
     await Review.deleteMany({
       _id: {
@@ -70,5 +70,6 @@ CampgroundSchema.post("findOneAndDelete", async function (doc) {
     });
   }
 });
-
-module.exports = mongoose.model("Campground", CampgroundSchema);
+// compiling our schema into a Model, then export it
+// A model is a class with which we construct documents. 
+module.exports = mongoose.model("Post", PostSchema);

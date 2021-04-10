@@ -25,7 +25,7 @@ router.post("/register",(request,response) => {
 			return response.render("register");
 		}
 		passport.authenticate("local")(request,response,()=> {
-			response.redirect("/campgrounds");
+			response.redirect("/posts");
 		});
 	});
 });
@@ -36,7 +36,7 @@ router.get("/login",(request,response)=>{
 });
 // app.post("/login",Middleware, callback);
 router.post("/login",passport.authenticate("local",{
-	successRedirect:"/campgrounds",
+	successRedirect:"/posts",
 	failureRedirect:"/login"
 }),(request,response)=>{
 	response.send("LOGIN Susccessfully");

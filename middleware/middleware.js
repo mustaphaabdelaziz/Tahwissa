@@ -1,6 +1,6 @@
-var Campground = require("../models/campground");
+var Post = require("../models/post");
 const Review = require('../models/review');
-const { campgroundSchema, reviewSchema } = require("../schemas.js");
+const { postSchema, reviewSchema } = require("../schemas.js");
 const ExpressError = require("../utils/ExpressError");
 // ALL MIDDLEWARE GOES HERE
 
@@ -14,10 +14,10 @@ module.exports.isLoggedIn = (req, res, next) => {
 };
 module.exports.isAuthor = async (req, res, next) => {
   const { id } = req.params;
-  const campground = await Campground.findById(id);
-  if (!campground.author.equals(req.user._id)) {
+  const post = await Post.findById(id);
+  if (!post.author.equals(req.user._id)) {
     req.flash("error", "You do not have permission to do that!");
-    return res.redirect(`/campgrounds/${id}`);
+    return res.redirect(`/posts/${id}`);
   }
   next();
 };
@@ -27,13 +27,13 @@ module.exports.isReviewAuthor = async (req, res, next) => {
   const review = await Review.findById(reviewId);
   if (!review.author.equals(req.user._id)) {
     req.flash("error", "You do not have permission to do that!");
-    return res.redirect(`/campgrounds/${id}`);
+    return res.redirect(`/posts/${id}`);
   }
   next();
 };
 
-module.exports.validateCampground = (req, res, next) => {
-  const { error } = campgroundSchema.validate(req.body);
+module.exports.validatePost = (req, res, next) => {
+  const { error } = postSchema.validate(req.body);
   if (error) {
     const msg = error.details.map((el) => el.message).join(" ");
     console.log(msg);

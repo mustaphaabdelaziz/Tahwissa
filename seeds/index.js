@@ -1,5 +1,5 @@
 const mongoose = require("mongoose"),
-  Campground = require("../models/campground"),
+  Post = require("../models/post"),
   cities = require("./cities"),
   { places, descriptors } = require("./seedHelpers");
 
@@ -54,7 +54,7 @@ var data = [
       "Tlemcen is a beautifull place to visit it has a lot of nice beaches",
   },
 ];
-mongoose.connect("mongodb://localhost:27017/yelpCamp_V11", {
+mongoose.connect("mongodb://localhost:27017/Tahwissa_v11", {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true,
@@ -66,12 +66,12 @@ db.once("open", () => {
 });
 const sample = (array) => array[Math.floor(Math.random() * array.length)];
 const seedDB = async () => {
-  await Campground.deleteMany({});
+  await Post.deleteMany({});
   console.log("cities:" + cities.length);
   for (let i = 0; i < 500; i++) {
     const random = Math.floor(Math.random() * 1000);
     const price = Math.floor(Math.random() * 20) + 10;
-    const camp = new Campground({
+    const camp = new Post({
       author: "606c52e80f535b8a2cfe2633",
       location: `${cities[random].city},${cities[random].state}`,
       title: `${sample(descriptors)} ${sample(places)}`,
