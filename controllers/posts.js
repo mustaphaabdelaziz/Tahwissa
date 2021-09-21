@@ -6,7 +6,9 @@ const mapBoxToken = process.env.MAPBOX_TOKEN;
 const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
 
 module.exports.index = async (req, res) => {
-  const posts = await Post.find({});
+  const posts = await Post.find({}).populate({
+    path: "author",
+  });
   res.render("posts/index", { posts });
 };
 
@@ -33,7 +35,7 @@ module.exports.createPost = async (req, res, next) => {
     url: f.path,
     filename: f.filename,
   }));
-  post.author = req.user._id;
+  // post.author = req.user._id;
   post.author = req.user._id;
   await post.save();
   // console.log(post);

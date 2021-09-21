@@ -18,9 +18,7 @@ const mongoSanitize = require("express-mongo-sanitize");
 const userRoutes = require("./routes/users");
 const postRoutes = require("./routes/posts");
 const reviewsRoutes = require("./routes/review");
-
 const MongoDBStore = require("connect-mongo");
-
 const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/Tahwissa_v11";
 // Try to connect to database
 mongoose.connect(dbUrl, {

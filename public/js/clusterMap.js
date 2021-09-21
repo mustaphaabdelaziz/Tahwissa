@@ -1,3 +1,4 @@
+
 mapboxgl.accessToken = mapToken;
 const map = new mapboxgl.Map({
   container: "cluster-map",
@@ -76,6 +77,7 @@ map.on("load", function () {
     const features = map.queryRenderedFeatures(e.point, {
       layers: ["clusters"],
     });
+    console.log("features");
     const clusterId = features[0].properties.cluster_id;
     map
       .getSource("posts")
@@ -95,6 +97,7 @@ map.on("load", function () {
   // description HTML from its properties.
   map.on("click", "unclustered-point", function (e) {
     const { popUpMarkup } = e.features[0].properties;
+
     const coordinates = e.features[0].geometry.coordinates.slice();
 
     // Ensure that if the map is zoomed out such that

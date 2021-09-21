@@ -55,10 +55,9 @@ const PostSchema = new Schema(
 
 PostSchema.virtual("properties.popUpMarkup").get(function () {
   return `
-  <strong><a href="/posts/${this._id}">${this.title}
-  <img class = " avatar thumbnail" src="${this.images[0].url}" />
-  </a><strong>
-  <p>${this.description.substring(0, 40)}...</p>`;
+  <strong><a class="text-decoration-none" href="/posts/${this._id}">${this.title}
+  <img class = "mapPicture thumbnail" src="${this.images[0].url}" />
+  </a><strong>`;
 });
 
 PostSchema.post("findOneAndDelete", async function (doc) {

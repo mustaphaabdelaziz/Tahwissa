@@ -5,11 +5,11 @@ const catchAsync = require("../utils/catchAsync");
 const users = require("../controllers/users");
 const multer = require("multer");
 const { profilestorage } = require("../cloudinary");
-const upload = multer({ storage:profilestorage });
+const upload = multer({ storage: profilestorage });
 router
   .route("/register")
   .get(users.renderRegisterForm)
-  .post(upload.single('image'),catchAsync(users.register));
+  .post(upload.single("image"), catchAsync(users.register));
 
 router
   .route("/login")
